@@ -1,6 +1,5 @@
 package com.militao.pontointeligente.api.entities;
 
-import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.militao.pontointeligente.api.enums.PerfilEnum;
 
@@ -43,7 +43,7 @@ public class Funcionario implements Serializable {
 	private Date dataCriacao;
 	private Date dataAtualizacao;
 	private Empresa empresa;
-	private List<Lancamento> lancamento;
+	private List<Lancamento> lancamentos;
 	
 	public Funcionario() {
 	}
@@ -90,7 +90,7 @@ public class Funcionario implements Serializable {
 		this.cpf = cpf;
 	}
 	
-	@Column( name = "valor_hora", nullable = false)
+	@Column( name = "valor_hora", nullable = true)
 	public BigDecimal getValorHora() {
 		return valorHora;
 	}
@@ -105,7 +105,7 @@ public class Funcionario implements Serializable {
 	}
 	
 
-	@Column( name = "qtd_horas_trabalho_dia", nullable = false)
+	@Column( name = "qtd_horas_trabalho_dia", nullable = true)
 	public Float getQtdHorasTrabalhoDia() {
 		return qtdHorasTrabalhoDia;
 	}
@@ -119,7 +119,7 @@ public class Funcionario implements Serializable {
 		this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
 	}
 	
-	@Column( name = "qtd_horas_almoco", nullable = false)
+	@Column( name = "qtd_horas_almoco", nullable = true)
 	public Float getQtdHorasAlmoco() {
 		return qtdHorasAlmoco;
 	}
@@ -169,13 +169,13 @@ public class Funcionario implements Serializable {
 		this.empresa = empresa;
 	}
 	
-	@OneToMany(mappedBy = "funcinario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<Lancamento> getLancamento() {
-		return lancamento;
+	@OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
 	}
 	
-	public void setLancamento(List<Lancamento> lancamento) {
-		this.lancamento = lancamento;
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class Funcionario implements Serializable {
 		return "Funcionario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
 				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
 				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
-				+ dataAtualizacao + ", empresa=" + empresa + ", lancamento=" + lancamento + "]";
+				+ dataAtualizacao + ", empresa=" + empresa + ", lancamento=" + lancamentos + "]";
 	}	
 		
 }

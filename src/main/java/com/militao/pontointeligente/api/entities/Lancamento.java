@@ -132,5 +132,4 @@ public class Lancamento implements Serializable{
 				+ ", funcionario=" + funcionario + "]";
 	}
 	
-	
 }
